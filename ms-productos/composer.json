@@ -1,0 +1,14 @@
+{
+    "name": "talia/ms-productos",
+    "authors": [
+        {
+            "name": "TalianaAguirre",
+            "email": "tsaguirre@uniboyaca.edu.co"
+        }
+    ],
+    "require": {
+        "slim/slim": "4.*",
+        "slim/psr7": "^1.8",
+        "illuminate/database": "^12.61"
+    }
+}
