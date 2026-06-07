@@ -1,0 +1,210 @@
+
+@auth = http://localhost:8001
+@reservas = http://localhost:8002
+@productos = http://localhost:8003
+@pedidos = http://localhost:8004
+@token = PEGAR_AQUI_EL_TOKEN
+
+
+### ============================================================
+### ms-auth (8001) - Autenticacion
+### ============================================================
+
+### Iniciar sesion
+POST {{auth}}/api/auth/login
+Content-Type: application/json
+
+{
+    "login": "admin",
+    "contrasena": "admin123"
+}
+
+### Validar sesion
+GET {{auth}}/api/auth/validate
+Authorization: Bearer {{token}}
+
+### Cerrar sesion
+POST {{auth}}/api/auth/logout
+Authorization: Bearer {{token}}
+
+
+### ============================================================
+### ms-reservas (8002) - Mesas
+### ============================================================
+
+### Listar mesas
+GET {{reservas}}/api/mesas
+Authorization: Bearer {{token}}
+
+### Crear mesa
+POST {{reservas}}/api/mesas
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "numero": "MESA-5",
+    "capacidad": 4,
+    "estado": "disponible"
+}
+
+### Editar mesa
+PUT {{reservas}}/api/mesas/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "capacidad": 6,
+    "estado": "reservada"
+}
+
+### Cambiar estado de mesa
+PUT {{reservas}}/api/mesas/1/estado
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "estado": "ocupada"
+}
+
+
+### ============================================================
+### ms-reservas (8002) - Reservas
+### ============================================================
+
+### Listar reservas
+GET {{reservas}}/api/reservas
+Authorization: Bearer {{token}}
+
+### Listar reservas con filtros (fecha, cliente, estado)
+GET {{reservas}}/api/reservas?fecha=2026-06-10&cliente=Carlos&estado=confirmada
+Authorization: Bearer {{token}}
+
+### Crear reserva
+POST {{reservas}}/api/reservas
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "nombre_cliente": "Ana Lopez",
+    "telefono_cliente": "3009999999",
+    "cantidad_personas": 3,
+    "fecha": "2026-06-20",
+    "hora": "20:00",
+    "mesa_id": 3,
+    "observaciones": "Cumpleanos"
+}
+
+### Editar reserva
+PUT {{reservas}}/api/reservas/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "fecha": "2026-06-21",
+    "hora": "21:00",
+    "mesa_id": 2,
+    "cantidad_personas": 4,
+    "observaciones": "Cambio de hora"
+}
+
+### Cancelar reserva
+PUT {{reservas}}/api/reservas/1/cancelar
+Authorization: Bearer {{token}}
+
+
+### ============================================================
+### ms-productos (8003) - Categorias y productos
+### ============================================================
+
+### Listar categorias
+GET {{productos}}/api/categorias
+Authorization: Bearer {{token}}
+
+### Listar productos
+GET {{productos}}/api/productos
+Authorization: Bearer {{token}}
+
+### Listar productos con filtros (categoria y disponibilidad)
+GET {{productos}}/api/productos?categoria_id=2&disponible=true
+Authorization: Bearer {{token}}
+
+### Crear producto
+POST {{productos}}/api/productos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "nombre": "Empanada",
+    "descripcion": "Empanada de carne",
+    "precio": 3500,
+    "disponible": true,
+    "categoria_id": 1
+}
+
+### Editar producto
+PUT {{productos}}/api/productos/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "precio": 30000,
+    "disponible": false
+}
+
+### Eliminar producto
+DELETE {{productos}}/api/productos/4
+Authorization: Bearer {{token}}
+
+
+### ============================================================
+### ms-pedidos (8004) - Pedidos
+### ------------------------------------------------------------
+### Nota: solo se puede crear un pedido sobre una mesa que NO
+### este "disponible" (cambiar la mesa a "ocupada" en ms-reservas).
+### ============================================================
+
+### Listar pedidos
+GET {{pedidos}}/api/pedidos
+Authorization: Bearer {{token}}
+
+### Listar pedidos por estado
+GET {{pedidos}}/api/pedidos?estado=pendiente
+Authorization: Bearer {{token}}
+
+### Ver detalle de un pedido
+GET {{pedidos}}/api/pedidos/1
+Authorization: Bearer {{token}}
+
+### Crear pedido
+POST {{pedidos}}/api/pedidos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "mesa_id": 2,
+    "productos": [
+        { "producto_id": 1, "cantidad": 2 },
+        { "producto_id": 2, "cantidad": 3 }
+    ]
+}
+
+### Editar pedido (reemplaza las lineas y recalcula totales)
+PUT {{pedidos}}/api/pedidos/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "mesa_id": 2,
+    "productos": [
+        { "producto_id": 1, "cantidad": 1 }
+    ]
+}
+
+### Cambiar estado del pedido
+PUT {{pedidos}}/api/pedidos/1/estado
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "estado": "en_preparacion"
+}
