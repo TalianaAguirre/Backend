@@ -1,0 +1,47 @@
+@base = http://localhost:8003
+@token = PEGAR_AQUI_EL_TOKEN
+
+### ── CATEGORIAS ──────────────────────────────────
+
+### Listar categorias
+GET {{base}}/api/categorias
+Authorization: Bearer {{token}}
+
+### ── PRODUCTOS ───────────────────────────────────
+
+### Listar productos
+GET {{base}}/api/productos
+Authorization: Bearer {{token}}
+
+### Listar productos con filtros
+GET {{base}}/api/productos?categoria_id=1&disponible=true
+Authorization: Bearer {{token}}
+
+### Crear producto
+POST {{base}}/api/productos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "nombre": "Empanada de carne",
+    "descripcion": "Empanada frita de carne",
+    "precio": 3500,
+    "disponible": true,
+    "categoria_id": 1
+}
+
+### Editar producto
+PUT {{base}}/api/productos/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "nombre": "Empanada de carne",
+    "precio": 4000,
+    "disponible": true,
+    "categoria_id": 1
+}
+
+### Eliminar producto
+DELETE {{base}}/api/productos/1
+Authorization: Bearer {{token}}

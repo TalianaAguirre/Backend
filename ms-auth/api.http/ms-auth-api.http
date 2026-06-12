@@ -1,0 +1,19 @@
+@base = http://localhost:8001
+@token = PEGAR_AQUI_EL_TOKEN
+
+### Iniciar sesion
+POST {{base}}/api/auth/login
+Content-Type: application/json
+
+{
+    "login": "admin",
+    "contrasena": "admin123"
+}
+
+### Validar sesion
+GET {{base}}/api/auth/validate
+Authorization: Bearer {{token}}
+
+### Cerrar sesion
+POST {{base}}/api/auth/logout
+Authorization: Bearer {{token}}

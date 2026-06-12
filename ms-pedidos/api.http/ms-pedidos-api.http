@@ -1,0 +1,53 @@
+@base = http://localhost:8004
+@token = PEGAR_AQUI_EL_TOKEN
+
+### Nota: solo se puede crear un pedido sobre una mesa que NO
+### este "disponible". Cambiarla a "ocupada" primero en ms-reservas.
+
+### ── PEDIDOS ──────────────────────────────────────
+
+### Listar pedidos
+GET {{base}}/api/pedidos
+Authorization: Bearer {{token}}
+
+### Listar pedidos por estado
+GET {{base}}/api/pedidos?estado=pendiente
+Authorization: Bearer {{token}}
+
+### Ver detalle de un pedido
+GET {{base}}/api/pedidos/1
+Authorization: Bearer {{token}}
+
+### Crear pedido
+POST {{base}}/api/pedidos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "mesa_id": 1,
+    "productos": [
+        { "producto_id": 1, "cantidad": 2 },
+        { "producto_id": 2, "cantidad": 1 }
+    ]
+}
+
+### Editar pedido
+PUT {{base}}/api/pedidos/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "mesa_id": 1,
+    "productos": [
+        { "producto_id": 1, "cantidad": 3 }
+    ]
+}
+
+### Cambiar estado del pedido
+PUT {{base}}/api/pedidos/1/estado
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "estado": "en_preparacion"
+}

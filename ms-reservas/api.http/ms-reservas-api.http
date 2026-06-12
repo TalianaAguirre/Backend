@@ -1,0 +1,80 @@
+@base = http://localhost:8002
+@token = PEGAR_AQUI_EL_TOKEN
+
+### ── MESAS ──────────────────────────────────────
+
+### Listar mesas
+GET {{base}}/api/mesas
+Authorization: Bearer {{token}}
+
+### Crear mesa
+POST {{base}}/api/mesas
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "numero": "Mesa 1",
+    "capacidad": 4,
+    "estado": "disponible"
+}
+
+### Editar mesa
+PUT {{base}}/api/mesas/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "capacidad": 6,
+    "estado": "disponible"
+}
+
+### Cambiar estado de mesa
+PUT {{base}}/api/mesas/1/estado
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "estado": "ocupada"
+}
+
+### ── RESERVAS ─────────────────────────────────────
+
+### Listar reservas
+GET {{base}}/api/reservas
+Authorization: Bearer {{token}}
+
+### Listar reservas con filtros
+GET {{base}}/api/reservas?fecha=2026-06-20&cliente=Ana&estado=pendiente
+Authorization: Bearer {{token}}
+
+### Crear reserva
+POST {{base}}/api/reservas
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "nombre_cliente": "Ana Lopez",
+    "telefono_cliente": "3009999999",
+    "cantidad_personas": 3,
+    "fecha": "2026-06-20",
+    "hora": "20:00",
+    "mesa_id": 1,
+    "observaciones": "Cumpleanos"
+}
+
+### Editar reserva
+PUT {{base}}/api/reservas/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "fecha": "2026-06-21",
+    "hora": "21:00",
+    "mesa_id": 1,
+    "cantidad_personas": 4,
+    "observaciones": "Cambio de hora"
+}
+
+### Cancelar reserva
+PUT {{base}}/api/reservas/1/cancelar
+Authorization: Bearer {{token}}
