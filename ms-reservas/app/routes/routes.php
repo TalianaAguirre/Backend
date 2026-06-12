@@ -4,6 +4,8 @@ use App\Controllers\MesaController;
 use App\Controllers\ReservaController;
 use App\Middleware\AuthMiddleware;
 
+
+global $app;
 $app->get('/api/mesas', [MesaController::class, 'listar'])->add(AuthMiddleware::class);
 $app->post('/api/mesas', [MesaController::class, 'crear'])->add(AuthMiddleware::class);
 $app->put('/api/mesas/{id}', [MesaController::class, 'actualizar'])->add(AuthMiddleware::class);

@@ -4,6 +4,7 @@ use App\Controllers\CategoriaController;
 use App\Controllers\ProductoController;
 use App\Middleware\AuthMiddleware;
 
+global $app;
 $app->get('/api/categorias', [CategoriaController::class, 'listar'])->add(AuthMiddleware::class);
 
 $app->get('/api/productos', [ProductoController::class, 'listar'])->add(AuthMiddleware::class);
