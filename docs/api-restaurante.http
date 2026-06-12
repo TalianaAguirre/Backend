@@ -6,9 +6,8 @@
 @token = PEGAR_AQUI_EL_TOKEN
 
 
-### ============================================================
 ### ms-auth (8001) - Autenticacion
-### ============================================================
+
 
 ### Iniciar sesion
 POST {{auth}}/api/auth/login
@@ -28,9 +27,8 @@ POST {{auth}}/api/auth/logout
 Authorization: Bearer {{token}}
 
 
-### ============================================================
+
 ### ms-reservas (8002) - Mesas
-### ============================================================
 
 ### Listar mesas
 GET {{reservas}}/api/mesas
@@ -67,9 +65,7 @@ Content-Type: application/json
 }
 
 
-### ============================================================
 ### ms-reservas (8002) - Reservas
-### ============================================================
 
 ### Listar reservas
 GET {{reservas}}/api/reservas
@@ -112,9 +108,7 @@ PUT {{reservas}}/api/reservas/1/cancelar
 Authorization: Bearer {{token}}
 
 
-### ============================================================
 ### ms-productos (8003) - Categorias y productos
-### ============================================================
 
 ### Listar categorias
 GET {{productos}}/api/categorias
@@ -156,12 +150,10 @@ DELETE {{productos}}/api/productos/4
 Authorization: Bearer {{token}}
 
 
-### ============================================================
 ### ms-pedidos (8004) - Pedidos
 ### ------------------------------------------------------------
 ### Nota: solo se puede crear un pedido sobre una mesa que NO
 ### este "disponible" (cambiar la mesa a "ocupada" en ms-reservas).
-### ============================================================
 
 ### Listar pedidos
 GET {{pedidos}}/api/pedidos

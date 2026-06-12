@@ -26,7 +26,7 @@ class AuthController
             $query->where('usuario', $login)->orWhere('correo', $login);
         })->where('estado', 'activo')->first();
 
-        if (!$usuario || !password_verify($contrasena, $usuario->contrasena)) {
+        if (!$usuario || $contrasena !== $usuario->contrasena) {
             $response->getBody()->write(json_encode([
                 'success' => false,
                 'message' => 'Credenciales incorrectas',
