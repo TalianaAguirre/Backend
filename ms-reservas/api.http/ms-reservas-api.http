@@ -1,7 +1,6 @@
 @base = http://localhost:8002
 @token = PEGAR_AQUI_EL_TOKEN
 
-### ── MESAS ──────────────────────────────────────
 
 ### Listar mesas
 GET {{base}}/api/mesas
@@ -37,7 +36,7 @@ Content-Type: application/json
     "estado": "ocupada"
 }
 
-### ── RESERVAS ─────────────────────────────────────
+
 
 ### Listar reservas
 GET {{base}}/api/reservas

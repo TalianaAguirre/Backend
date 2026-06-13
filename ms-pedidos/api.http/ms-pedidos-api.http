@@ -1,10 +1,6 @@
 @base = http://localhost:8004
 @token = PEGAR_AQUI_EL_TOKEN
 
-### Nota: solo se puede crear un pedido sobre una mesa que NO
-### este "disponible". Cambiarla a "ocupada" primero en ms-reservas.
-
-### ── PEDIDOS ──────────────────────────────────────
 
 ### Listar pedidos
 GET {{base}}/api/pedidos

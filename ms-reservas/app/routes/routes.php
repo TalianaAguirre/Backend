@@ -10,6 +10,7 @@ $app->get('/api/mesas', [MesaController::class, 'listar'])->add(AuthMiddleware::
 $app->post('/api/mesas', [MesaController::class, 'crear'])->add(AuthMiddleware::class);
 $app->put('/api/mesas/{id}', [MesaController::class, 'actualizar'])->add(AuthMiddleware::class);
 $app->put('/api/mesas/{id}/estado', [MesaController::class, 'cambiarEstado'])->add(AuthMiddleware::class);
+$app->delete('/api/mesas/{id}', [MesaController::class, 'eliminar'])->add(AuthMiddleware::class);
 
 $app->get('/api/reservas', [ReservaController::class, 'listar'])->add(AuthMiddleware::class);
 $app->post('/api/reservas', [ReservaController::class, 'crear'])->add(AuthMiddleware::class);

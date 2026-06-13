@@ -127,6 +127,23 @@ class MesaController
         return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
     }
 
+    public function eliminar(Request $request, Response $response, array $args): Response
+{
+    $mesa = Mesa::find($args['id']);
+
+    if (!$mesa) {
+        return $this->error($response, 'Mesa no encontrada', 404);
+    }
+
+    $mesa->delete();
+
+    $response->getBody()->write(json_encode([
+        'success' => true,
+        'message' => 'Mesa eliminada correctamente',
+    ]));
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
+}
+
     private function error(Response $response, string $message, int $status): Response
     {
         $response->getBody()->write(json_encode([
